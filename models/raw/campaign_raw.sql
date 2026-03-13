@@ -1,3 +1,8 @@
+{{config(
+    materialized= 'incremental',
+    unique_key= 'campaign_id'
+)}}
+
 SELECT
     f.value:campaign_id::STRING AS campaign_id,
     f.value:campaign_name::STRING AS campaign_name,
@@ -16,8 +21,20 @@ SELECT
     TRY_TO_NUMBER(REGEXP_REPLACE(f.value:total_cost::STRING,'[$,]','')) AS total_cost,
     TRY_TO_NUMBER(REGEXP_REPLACE(f.value:total_revenue::STRING,'[$,]','')) AS total_revenue,
 
+    MD5(TO_VARCHAR(f.value)) AS record_hash,
+    CURRENT_TIMESTAMP() AS effective_from,
+    NULL AS effective_to,
+    TRUE AS is_current,
+    CURRENT_TIMESTAMP() AS load_timestamp,
+
     filename,
     file_row_number
 
-FROM {{ source('raw','ext_campaign') }},
+FROM {{source('raw', 'ext_campaign')}},
 LATERAL FLATTEN(input => raw_data:campaigns_data) f
+
+{% if is_incremental() %}
+WHERE filename NOT IN (
+    SELECT DISTINCT filename FROM {{ this }}
+)
+{% endif %}
