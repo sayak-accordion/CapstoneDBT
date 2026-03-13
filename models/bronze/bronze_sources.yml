@@ -1,0 +1,15 @@
+sources:
+  - name: raw
+    database: CAPSTONE69
+    schema: RAW
+
+    tables:
+      - name: campaign_raw
+      - name: customer_raw
+      - name: employee_raw
+      - name: order_product_raw
+      - name: orders_raw
+      - name: product_raw
+      - name: store_raw
+      - name: supplier_raw
+      

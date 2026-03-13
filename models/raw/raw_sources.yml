@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw
+    database: CAPSTONE69
+    schema: RAW
+
+    tables:
+      - name: ext_campaign
+      - name: ext_customer
+      - name: ext_employee
+      - name: ext_orders
+      - name: ext_product
+      - name: ext_store
+      - name: ext_supplier
