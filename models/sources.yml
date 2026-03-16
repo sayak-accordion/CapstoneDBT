@@ -1,0 +1,68 @@
+version: 2
+
+sources:
+  - name: raw
+    database: CAPSTONE69
+    schema: RAW
+
+    tables:
+      - name: ext_campaign
+      - name: ext_customer
+      - name: ext_employee
+      - name: ext_orders
+      - name: ext_product
+      - name: ext_store
+      - name: ext_supplier
+      - name: campaign_raw
+      - name: customer_raw
+      - name: employee_raw
+      - name: order_product_raw
+      - name: orders_raw
+      - name: product_raw
+      - name: store_raw
+      - name: supplier_raw
+
+  - name: bronze
+    database: CAPSTONE69
+    schema: BRONZE
+
+    tables:
+      - name: campaign_brnz
+      - name: customer_brnz
+      - name: employee_brnz
+      - name: order_product_brnz
+      - name: orders_brnz
+      - name: product_brnz
+      - name: store_brnz
+      - name: supplier_brnz
+      - name: convert2Pascal
+      - name: standardisePhone
+
+  - name: silver
+    database: CAPSTONE69
+    schema: SILVER
+
+    tables:
+      - name: campaign_slvr
+      - name: customer_slvr
+      - name: employee_slvr
+      - name: order_product_slvr
+      - name: orders_slvr
+      - name: product_slvr
+      - name: store_slvr
+      - name: supplier_slvr
+
+  - name: gold
+    database: CAPSTONE69
+    schema: GOLD
+
+    tables:
+      - name: DIM_Customer
+      - name: DIM_Product
+      - name: DIM_Store
+      - name: DIM_Supplier
+      - name: DIM_MarketingCampaign
+      - name: DIM_Date
+      - name: DIM_Employee
+      - name: FACT_Sales
+      - name: FACT_MarketingPerformance
